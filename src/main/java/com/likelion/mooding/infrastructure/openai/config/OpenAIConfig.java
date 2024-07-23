@@ -10,9 +10,11 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class OpenAIConfig {
 
-    // TODO: OpenAI API Key 숨기기
-//    @Value("${openai.api.key}")
-    private final String OPENAI_API_KEY = "";
+    private final String OPENAI_API_KEY;
+
+    public OpenAIConfig(@Value("${openai.api.key}") final String OPENAI_API_KEY) {
+        this.OPENAI_API_KEY = OPENAI_API_KEY;
+    }
 
     @Bean
     public WebClient openAIClient() {

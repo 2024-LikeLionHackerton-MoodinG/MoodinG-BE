@@ -25,3 +25,7 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+
+openai:
+  api:
+    key: ${OPENAI_API_KEY}
