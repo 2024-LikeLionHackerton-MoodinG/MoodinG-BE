@@ -32,7 +32,7 @@ public class GuestArgumentResolver implements HandlerMethodArgumentResolver {
             throw new SessionTimeoutException();
         }
 
-        final String uuid = (String) session.getAttribute("guestId");
+        final String uuid = session.getAttribute("guestId").toString();
         return new Guest(uuid);
     }
 }
