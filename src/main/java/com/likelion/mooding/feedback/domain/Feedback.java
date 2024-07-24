@@ -1,6 +1,7 @@
 package com.likelion.mooding.feedback.domain;
 
 import com.likelion.mooding.auth.presentation.dto.Guest;
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -19,6 +20,7 @@ public class Feedback {
     @Enumerated(value = EnumType.STRING)
     private FeedbackStatus feedbackStatus;
 
+    @Column(length = 1500)
     private String content;
 
     @Embedded
