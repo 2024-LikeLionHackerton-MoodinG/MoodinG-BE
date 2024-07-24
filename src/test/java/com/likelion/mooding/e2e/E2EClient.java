@@ -1,6 +1,6 @@
 package com.likelion.mooding.e2e;
 
-import com.likelion.mooding.feedback.presentation.dto.FeedbackCreateRequest;
+import com.likelion.mooding.feedback.application.dto.FeedbackCreateRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;

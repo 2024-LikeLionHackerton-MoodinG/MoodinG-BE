@@ -1,4 +1,4 @@
-package com.likelion.mooding.feedback.presentation.dto;
+package com.likelion.mooding.feedback.application.dto;
 
 public record FeedbackStatusResponse (String status) {
 }

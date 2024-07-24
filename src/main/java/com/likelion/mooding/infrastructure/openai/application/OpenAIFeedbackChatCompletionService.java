@@ -2,7 +2,7 @@ package com.likelion.mooding.infrastructure.openai.application;
 
 import com.likelion.mooding.feedback.application.FeedbackChatCompletionService;
 import com.likelion.mooding.feedback.application.dto.FeedbackCreateResponse;
-import com.likelion.mooding.feedback.presentation.dto.FeedbackCreateRequest;
+import com.likelion.mooding.feedback.application.dto.FeedbackCreateRequest;
 import com.likelion.mooding.infrastructure.openai.dto.ChatCompletionCreateRequest;
 import com.likelion.mooding.infrastructure.openai.dto.ChatCompletionCreateResponse;
 import org.springframework.http.MediaType;
