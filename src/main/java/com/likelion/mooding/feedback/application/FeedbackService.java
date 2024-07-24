@@ -5,7 +5,9 @@ import com.likelion.mooding.feedback.application.dto.FeedbackCreateResponse;
 import com.likelion.mooding.feedback.domain.Feedback;
 import com.likelion.mooding.feedback.domain.FeedbackRepository;
 import com.likelion.mooding.feedback.domain.FeedbackStatus;
+import com.likelion.mooding.feedback.exception.FeedbackAuthException;
 import com.likelion.mooding.feedback.presentation.dto.FeedbackCreateRequest;
+import com.likelion.mooding.feedback.presentation.dto.FeedbackStatusResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
@@ -34,5 +36,14 @@ public class FeedbackService {
                                                                                          FeedbackStatus.DONE,
                                                                                          response.feedback()));
         return feedback.getId();
+    }
+
+    public FeedbackStatusResponse getFeedbackStatus(final Guest guest,
+                                                    final Long id) {
+        final Feedback feedback = feedbackRepository.findByIdOrThrow(id);
+        if (!feedback.isOwner(guest)) {
+            throw new FeedbackAuthException();
+        }
+        return new FeedbackStatusResponse(feedback.getFeedbackStatus().name());
     }
 }

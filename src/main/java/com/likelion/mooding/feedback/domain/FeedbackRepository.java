@@ -7,6 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
 
+    default Feedback findByIdOrThrow(final Long id) {
+        return findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid feedback id"));
+    }
+
     @Transactional
     @Modifying
     @Query("UPDATE Feedback f SET f.feedbackStatus = :feedbackStatus, f.content = :content WHERE f.id = :id")

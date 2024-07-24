@@ -28,4 +28,4 @@ logging:
 
 openai:
   api:
-    key: ${OPENAI_API_KEY}
+    key: 'fake-key'

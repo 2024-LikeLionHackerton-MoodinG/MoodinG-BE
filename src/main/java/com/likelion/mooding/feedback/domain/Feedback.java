@@ -43,6 +43,10 @@ public class Feedback {
     protected Feedback() {
     }
 
+    public boolean isOwner(final Guest other) {
+        return this.guest.equals(other);
+    }
+
     public Long getId() {
         return id;
     }
