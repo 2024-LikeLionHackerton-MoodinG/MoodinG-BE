@@ -48,4 +48,17 @@ public class E2EClient {
                           .log().all()
                           .extract();
     }
+
+    public static ExtractableResponse<Response> 피드백_결과_요청(final String sessionId,
+                                                            final Long id) {
+        return RestAssured.given()
+                          .sessionId(sessionId)
+                          .contentType(MediaType.APPLICATION_JSON_VALUE)
+                          .log().all()
+                          .when()
+                          .get("/feedback/{id}", id)
+                          .then()
+                          .log().all()
+                          .extract();
+    }
 }
