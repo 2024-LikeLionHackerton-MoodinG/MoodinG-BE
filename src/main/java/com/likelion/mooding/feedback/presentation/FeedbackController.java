@@ -4,6 +4,7 @@ import com.likelion.mooding.auth.annotation.Auth;
 import com.likelion.mooding.auth.presentation.dto.Guest;
 import com.likelion.mooding.feedback.application.FeedbackService;
 import com.likelion.mooding.feedback.presentation.dto.FeedbackCreateRequest;
+import com.likelion.mooding.feedback.presentation.dto.FeedbackResultResponse;
 import com.likelion.mooding.feedback.presentation.dto.FeedbackStatusResponse;
 import java.net.URI;
 import org.springframework.http.HttpStatus;
@@ -32,6 +33,14 @@ public class FeedbackController {
         return ResponseEntity.status(HttpStatus.OK)
                              .location(URI.create("/feedback/status/" + id))
                              .build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<FeedbackResultResponse> getFeedback(@Auth final Guest guest,
+                                                              @PathVariable final Long id) {
+        final FeedbackResultResponse response = feedbackService.getFeedback(guest, id);
+        return ResponseEntity.status(HttpStatus.OK)
+                             .body(response);
     }
 
     @GetMapping("/status/{id}")
