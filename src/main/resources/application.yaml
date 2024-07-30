@@ -29,3 +29,5 @@ logging:
 openai:
   api:
     key: ${OPENAI_API_KEY}
+
+allowed-origin: ${ALLOWED_ORIGIN}
