@@ -35,4 +35,7 @@ openai:
   api:
     key: ${OPENAI_API_KEY}
 
-allowed-origin: ${ALLOWED_ORIGIN}
+allowed-origin:
+  domain:
+    url: ${DOMAIN_NAME}
+    www-url: ${WWW_DOMAIN_NAME}

@@ -13,10 +13,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    private final String ALLOWED_ORIGIN;
+    private final String DOMAIN_NAME;
+    private final String WWW_DOMAIN_NAME;
 
-    public WebConfig(@Value("${allowed-origin}") final String ALLOWED_ORIGIN) {
-        this.ALLOWED_ORIGIN = ALLOWED_ORIGIN;
+    public WebConfig(
+            @Value("${allowed-origin.domain.url}") final String DOMAIN_NAME,
+            @Value("${allowed-origin.domain.www-url}") final String WWW_DOMAIN_NAME
+            ) {
+        this.DOMAIN_NAME = DOMAIN_NAME;
+        this.WWW_DOMAIN_NAME = WWW_DOMAIN_NAME;
     }
 
     @Override
@@ -33,7 +38,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", ALLOWED_ORIGIN)
+                .allowedOrigins("http://localhost:3000", DOMAIN_NAME, WWW_DOMAIN_NAME)
                 .allowedMethods("GET", "POST", "OPTIONS")
                 .allowedHeaders("*")
                 .exposedHeaders("*")
