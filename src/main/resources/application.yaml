@@ -2,6 +2,11 @@ server:
   servlet:
     encoding:
       charset: UTF-8
+    session:
+      cookie:
+        same-site: none
+        secure: true
+        http-only: true
 spring:
   h2:
     console:
