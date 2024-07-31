@@ -5,6 +5,7 @@ import com.likelion.mooding.auth.presentation.interceptor.GuestInterceptor;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -41,7 +42,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("http://localhost:3000", DOMAIN_NAME, WWW_DOMAIN_NAME)
                 .allowedMethods("GET", "POST", "OPTIONS")
                 .allowedHeaders("*")
-                .exposedHeaders("*")
+                .exposedHeaders(HttpHeaders.LOCATION, HttpHeaders.COOKIE, HttpHeaders.CONTENT_TYPE)
                 .allowCredentials(true)
                 .maxAge(3600);
     }
