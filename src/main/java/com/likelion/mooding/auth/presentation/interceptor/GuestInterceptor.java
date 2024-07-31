@@ -12,6 +12,9 @@ public class GuestInterceptor implements HandlerInterceptor {
     public boolean preHandle(final HttpServletRequest request,
                              final HttpServletResponse response,
                              final Object handler) throws Exception {
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            return true;
+        }
         final HttpSession httpSession = request.getSession(false);
         if (httpSession == null) { // 세션 ID가 아예 없거나 잘못된 세션 ID로 요청했을 때
             throw new SessionNotFoundException();
