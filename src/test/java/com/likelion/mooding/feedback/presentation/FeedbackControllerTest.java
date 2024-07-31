@@ -10,9 +10,9 @@ import static org.mockito.BDDMockito.given;
 
 import com.likelion.mooding.feedback.application.FeedbackChatCompletionService;
 import com.likelion.mooding.feedback.application.dto.FeedbackCreateResponse;
-import com.likelion.mooding.feedback.presentation.dto.FeedbackCreateRequest;
-import com.likelion.mooding.feedback.presentation.dto.FeedbackResultResponse;
-import com.likelion.mooding.feedback.presentation.dto.FeedbackStatusResponse;
+import com.likelion.mooding.feedback.application.dto.FeedbackCreateRequest;
+import com.likelion.mooding.feedback.application.dto.FeedbackResultResponse;
+import com.likelion.mooding.feedback.application.dto.FeedbackStatusResponse;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
