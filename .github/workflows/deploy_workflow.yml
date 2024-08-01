@@ -1,0 +1,20 @@
+name: Mooding Deploy Workflow
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: |
+          cd ~/
+          sudo ./auto.sh
+            
