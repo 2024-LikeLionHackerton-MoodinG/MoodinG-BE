@@ -39,7 +39,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(final CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", DOMAIN_NAME, WWW_DOMAIN_NAME)
+                .allowedOrigins("http://localhost:3000", DOMAIN_NAME, WWW_DOMAIN_NAME, "https://66ab718089fd2808c4ff3267--mooding.netlify.app")
                 .allowedMethods("GET", "POST", "OPTIONS")
                 .allowedHeaders("*")
                 .exposedHeaders(HttpHeaders.LOCATION, HttpHeaders.COOKIE, HttpHeaders.CONTENT_TYPE)
