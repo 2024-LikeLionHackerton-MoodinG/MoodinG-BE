@@ -1,7 +1,8 @@
 package com.likelion.mooding.auth.presentation.argumentresolver;
 
 import com.likelion.mooding.auth.annotation.Auth;
-import com.likelion.mooding.auth.exception.SessionTimeoutException;
+import com.likelion.mooding.auth.exception.AuthException;
+import com.likelion.mooding.auth.exception.AuthExceptionType;
 import com.likelion.mooding.auth.presentation.dto.Guest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -15,7 +16,8 @@ public class GuestArgumentResolver implements HandlerMethodArgumentResolver {
 
     @Override
     public boolean supportsParameter(final MethodParameter parameter) {
-        return parameter.hasParameterAnnotation(Auth.class) && parameter.getParameterType().equals(Guest.class);
+        return parameter.hasParameterAnnotation(Auth.class) && parameter.getParameterType()
+                                                                        .equals(Guest.class);
     }
 
     @Override
@@ -29,7 +31,7 @@ public class GuestArgumentResolver implements HandlerMethodArgumentResolver {
         final HttpSession session = request.getSession(false);
 
         if (session == null) {
-            throw new SessionTimeoutException();
+            throw new AuthException(AuthExceptionType.INVALID_SESSION);
         }
 
         final String uuid = session.getAttribute("guestId").toString();

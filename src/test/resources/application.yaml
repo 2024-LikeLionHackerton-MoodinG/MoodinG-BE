@@ -29,3 +29,8 @@ logging:
 openai:
   api:
     key: 'fake-key'
+
+allowed-origin:
+  domain:
+    url: 'fake-domain'
+    www-url: 'fake-www-domain'

@@ -10,9 +10,9 @@ import com.likelion.mooding.feedback.application.dto.FeedbackCreateResponse;
 import com.likelion.mooding.feedback.domain.Feedback;
 import com.likelion.mooding.feedback.domain.FeedbackRepository;
 import com.likelion.mooding.feedback.domain.FeedbackStatus;
-import com.likelion.mooding.feedback.exception.FeedbackAuthException;
 import com.likelion.mooding.feedback.application.dto.FeedbackCreateRequest;
 import com.likelion.mooding.feedback.application.dto.FeedbackStatusResponse;
+import com.likelion.mooding.feedback.exception.FeedbackException;
 import java.time.Duration;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator.ReplaceUnderscores;
@@ -97,7 +97,7 @@ class FeedbackServiceTest {
             // when & then
             assertThatThrownBy(
                     () -> feedbackService.getFeedbackStatus(new Guest(otherId), feedback.getId()))
-                    .isInstanceOf(FeedbackAuthException.class);
+                    .isInstanceOf(FeedbackException.class);
         }
     }
 

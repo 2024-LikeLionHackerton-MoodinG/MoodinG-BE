@@ -1,6 +1,7 @@
 package com.likelion.mooding.auth.presentation.interceptor;
 
-import com.likelion.mooding.auth.exception.SessionNotFoundException;
+import com.likelion.mooding.auth.exception.AuthException;
+import com.likelion.mooding.auth.exception.AuthExceptionType;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -16,8 +17,8 @@ public class GuestInterceptor implements HandlerInterceptor {
             return true;
         }
         final HttpSession httpSession = request.getSession(false);
-        if (httpSession == null) { // 세션 ID가 아예 없거나 잘못된 세션 ID로 요청했을 때
-            throw new SessionNotFoundException();
+        if (httpSession == null) {
+            throw new AuthException(AuthExceptionType.INVALID_SESSION);
         }
         return true;
     }
