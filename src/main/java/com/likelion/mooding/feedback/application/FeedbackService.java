@@ -1,14 +1,15 @@
 package com.likelion.mooding.feedback.application;
 
 import com.likelion.mooding.auth.presentation.dto.Guest;
+import com.likelion.mooding.feedback.application.dto.FeedbackCreateRequest;
 import com.likelion.mooding.feedback.application.dto.FeedbackCreateResponse;
+import com.likelion.mooding.feedback.application.dto.FeedbackResultResponse;
+import com.likelion.mooding.feedback.application.dto.FeedbackStatusResponse;
 import com.likelion.mooding.feedback.domain.Feedback;
 import com.likelion.mooding.feedback.domain.FeedbackRepository;
 import com.likelion.mooding.feedback.domain.FeedbackStatus;
-import com.likelion.mooding.feedback.exception.FeedbackAuthException;
-import com.likelion.mooding.feedback.application.dto.FeedbackCreateRequest;
-import com.likelion.mooding.feedback.application.dto.FeedbackResultResponse;
-import com.likelion.mooding.feedback.application.dto.FeedbackStatusResponse;
+import com.likelion.mooding.feedback.exception.FeedbackException;
+import com.likelion.mooding.feedback.exception.FeedbackExceptionType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Mono;
@@ -32,10 +33,12 @@ public class FeedbackService {
         final Feedback feedback = new Feedback(FeedbackStatus.IN_PROGRESS, "", guest);
         feedbackRepository.save(feedback);
 
-        final Mono<FeedbackCreateResponse> mono = feedbackChatCompletionService.completeChat(request);
-        mono.subscribe(response -> feedbackRepository.updateFeedbackStatusAndContentById(feedback.getId(),
-                                                                                         FeedbackStatus.DONE,
-                                                                                         response.feedback()));
+        final Mono<FeedbackCreateResponse> mono = feedbackChatCompletionService.completeChat(
+                request);
+        mono.subscribe(
+                response -> feedbackRepository.updateFeedbackStatusAndContentById(feedback.getId(),
+                        FeedbackStatus.DONE,
+                        response.feedback()));
         return feedback.getId();
     }
 
@@ -43,7 +46,7 @@ public class FeedbackService {
                                                     final Long id) {
         final Feedback feedback = feedbackRepository.findByIdOrThrow(id);
         if (!feedback.isOwner(guest)) {
-            throw new FeedbackAuthException();
+            throw new FeedbackException(FeedbackExceptionType.NOT_FOUND_FEEDBACK);
         }
         return new FeedbackStatusResponse(feedback.getFeedbackStatus().name());
     }
@@ -52,7 +55,7 @@ public class FeedbackService {
                                               final Long id) {
         final Feedback feedback = feedbackRepository.findByIdOrThrow(id);
         if (!feedback.isOwner(guest)) {
-            throw new FeedbackAuthException();
+            throw new FeedbackException(FeedbackExceptionType.NOT_FOUND_FEEDBACK);
         }
         return new FeedbackResultResponse(feedback.getContent());
     }

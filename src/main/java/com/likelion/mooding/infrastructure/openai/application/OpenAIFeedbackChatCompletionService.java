@@ -1,8 +1,8 @@
 package com.likelion.mooding.infrastructure.openai.application;
 
 import com.likelion.mooding.feedback.application.FeedbackChatCompletionService;
-import com.likelion.mooding.feedback.application.dto.FeedbackCreateResponse;
 import com.likelion.mooding.feedback.application.dto.FeedbackCreateRequest;
+import com.likelion.mooding.feedback.application.dto.FeedbackCreateResponse;
 import com.likelion.mooding.infrastructure.openai.dto.ChatCompletionCreateRequest;
 import com.likelion.mooding.infrastructure.openai.dto.ChatCompletionCreateResponse;
 import org.springframework.http.MediaType;
@@ -23,9 +23,12 @@ public class OpenAIFeedbackChatCompletionService implements FeedbackChatCompleti
     public Mono<FeedbackCreateResponse> completeChat(final FeedbackCreateRequest request) {
         final Mono<ChatCompletionCreateResponse> mono = webClient.post()
                                                                  .accept(MediaType.APPLICATION_JSON)
-                                                                 .bodyValue(ChatCompletionCreateRequest.from(request.diaryContent()))
+                                                                 .bodyValue(
+                                                                         ChatCompletionCreateRequest.from(
+                                                                                 request.diaryContent()))
                                                                  .retrieve()
-                                                                 .bodyToMono(ChatCompletionCreateResponse.class);
+                                                                 .bodyToMono(
+                                                                         ChatCompletionCreateResponse.class);
 
         return mono.flatMap(response -> {
             final String feedback = response.getMessageContent();

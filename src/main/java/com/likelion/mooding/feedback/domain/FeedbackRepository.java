@@ -14,5 +14,6 @@ public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     @Transactional
     @Modifying
     @Query("UPDATE Feedback f SET f.feedbackStatus = :feedbackStatus, f.content = :content WHERE f.id = :id")
-    void updateFeedbackStatusAndContentById(final Long id, final FeedbackStatus feedbackStatus, final String content);
+    void updateFeedbackStatusAndContentById(final Long id, final FeedbackStatus feedbackStatus,
+                                            final String content);
 }

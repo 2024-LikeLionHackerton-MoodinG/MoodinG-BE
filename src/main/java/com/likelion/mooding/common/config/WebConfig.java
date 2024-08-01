@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer {
     public WebConfig(
             @Value("${allowed-origin.domain.url}") final String DOMAIN_NAME,
             @Value("${allowed-origin.domain.www-url}") final String WWW_DOMAIN_NAME
-            ) {
+    ) {
         this.DOMAIN_NAME = DOMAIN_NAME;
         this.WWW_DOMAIN_NAME = WWW_DOMAIN_NAME;
     }
